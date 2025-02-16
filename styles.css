@@ -1,0 +1,163 @@
+/* Styling untuk body */
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Elemen konten (Biar Selalu di Tengah) */
+#content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+}
+
+/* Efek ketikan */
+.typing-effect {
+    display: inline-block;
+    font-size: 24px;
+    color: white;
+    letter-spacing: 1px;
+    animation: glow 1.5s ease-in-out infinite alternate;
+    max-width: 80vw;
+    word-wrap: break-word;
+}
+
+/* Efek Glow Pink */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px rgb(255, 0, 179), 0 0 10px rgb(255, 0, 179), 0 0 15px rgb(255, 0, 179);
+    }
+    100% {
+        text-shadow: 0 0 10px rgb(255, 0, 179), 0 0 20px rgb(255, 0, 179), 0 0 30px rgb(255, 0, 179);
+    }
+}
+
+/* Tombol */
+button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: none;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+    width: 80%;
+    max-width: 200px;
+}
+
+/* Animasi Foto */
+#photo-animation {
+    display: none;
+    width: 80%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+#photo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Efek Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Efek Hujan */
+#rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.raindrop {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: white;
+    opacity: 0.5;
+    animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+    from {
+        transform: translateY(-100vh);
+    }
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Media Query buat HP */
+@media (max-width: 480px) {
+    .typing-effect {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    #content {
+        max-width: 95vw;
+        padding: 15px;
+    }
+}
+
+/* Efek Kembang Api */
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(10);
+    }
+}
+
