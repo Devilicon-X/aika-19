@@ -47,7 +47,7 @@ function typeMessage(message, callback) {
             clearInterval(interval);
             if (callback) callback();
         }
-    }, 100);
+    }, 50);
 }
 
 // Fungsi mulai mengetik
