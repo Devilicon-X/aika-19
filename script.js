@@ -65,25 +65,34 @@ function startTyping() {
 }
 
 // Fungsi buat bikin ledakan kembang api
-function createFirework(x, y) {
-    let particleCount = 30; // Kurangi jumlah partikel biar lebih pas
-    let spreadRange = window.innerWidth * 0.3; // Batasi penyebaran agar gak keluar layar
+function startFireworks() {
+    let fireworkCount = 10; // Kurangi jumlah kembang api
+    let interval = setInterval(() => {
+        let x = Math.random() * (window.innerWidth * 0.8) + (window.innerWidth * 0.1); // Batasi area horizontal
+        let y = Math.random() * (window.innerHeight * 0.5); // Batasi area vertikal
+        createFirework(x, y);
+    }, 500);
 
+    setTimeout(() => clearInterval(interval), 8000);
+}
+
+function createFirework(x, y) {
+    let particleCount = 30; // Kurangi partikel biar gak nyebar luas
     for (let i = 0; i < particleCount; i++) {
         let particle = document.createElement("div");
         particle.classList.add("firework");
         document.body.appendChild(particle);
 
         let angle = (Math.PI * 2 * i) / particleCount;
-        let speed = Math.random() * 4 + 2; // Sedikit lebih lambat biar gak terlalu liar
-        let velocityX = Math.cos(angle) * speed * (Math.random() * 0.7 + 0.3);
-        let velocityY = Math.sin(angle) * speed * (Math.random() * 0.7 + 0.3);
+        let speed = Math.random() * 4 + 2;
+        let velocityX = Math.cos(angle) * speed * 0.5; // Kurangi kecepatan biar gak keluar layar
+        let velocityY = Math.sin(angle) * speed * 0.5;
 
         particle.style.left = `${x}px`;
         particle.style.top = `${y}px`;
         particle.style.backgroundColor = getRandomColor();
 
-        animateParticle(particle, velocityX, velocityY, spreadRange);
+        animateParticle(particle, velocityX, velocityY);
     }
 }
 
