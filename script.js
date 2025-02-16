@@ -66,47 +66,50 @@ function startTyping() {
 
 // Fungsi buat bikin ledakan kembang api
 function createFirework(x, y) {
-    let particleCount = 50; // Banyaknya partikel per ledakan
+    let particleCount = 30; // Kurangi jumlah partikel biar lebih pas
+    let spreadRange = window.innerWidth * 0.3; // Batasi penyebaran agar gak keluar layar
+
     for (let i = 0; i < particleCount; i++) {
         let particle = document.createElement("div");
         particle.classList.add("firework");
         document.body.appendChild(particle);
 
         let angle = (Math.PI * 2 * i) / particleCount;
-        let speed = Math.random() * 6 + 4; // Lebih cepat
-        let velocityX = Math.cos(angle) * speed;
-        let velocityY = Math.sin(angle) * speed;
+        let speed = Math.random() * 4 + 2; // Sedikit lebih lambat biar gak terlalu liar
+        let velocityX = Math.cos(angle) * speed * (Math.random() * 0.7 + 0.3);
+        let velocityY = Math.sin(angle) * speed * (Math.random() * 0.7 + 0.3);
 
         particle.style.left = `${x}px`;
         particle.style.top = `${y}px`;
         particle.style.backgroundColor = getRandomColor();
 
-        animateParticle(particle, velocityX, velocityY);
+        animateParticle(particle, velocityX, velocityY, spreadRange);
     }
 }
 
-// Animasi partikel kembang api
-function animateParticle(particle, velocityX, velocityY) {
+function animateParticle(particle, velocityX, velocityY, spreadRange) {
     let x = parseFloat(particle.style.left);
     let y = parseFloat(particle.style.top);
-    let gravity = 0.08; // Efek jatuh lebih smooth
+    let gravity = 0.06; // Sedikit lebih halus jatuhnya
     let opacity = 1;
 
     function frame() {
         x += velocityX;
         y += velocityY;
         velocityY += gravity;
-        opacity -= 0.015; // Fade out lebih lambat
+        opacity -= 0.02; // Fade out lebih smooth
+
+        // Batasi supaya gak keluar batas
+        if (Math.abs(x - window.innerWidth / 2) > spreadRange || opacity <= 0) {
+            particle.remove();
+            return;
+        }
 
         particle.style.left = `${x}px`;
         particle.style.top = `${y}px`;
         particle.style.opacity = opacity;
 
-        if (opacity > 0) {
-            requestAnimationFrame(frame);
-        } else {
-            particle.remove();
-        }
+        requestAnimationFrame(frame);
     }
     frame();
 }
