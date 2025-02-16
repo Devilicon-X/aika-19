@@ -13,6 +13,11 @@ body {
     touch-acton: nne;
 }
 
+* {
+    -webkit-overflow-scrolling: none;
+    overscroll-behavior: none;
+}
+
 /* Elemen konten (Biar Selalu di Tengah) */
 #content {
     position: absolute;
